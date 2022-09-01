@@ -48,9 +48,13 @@ const setCache = function (req, res, next) {
 
 app.use(setCache);
 
-app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged In' : 'Logged Out');
+app.get('*', (req, res) => {
+  res.sendFile('index.html', {root: path.join(__dirname, './public')});
 });
+
+// app.get('/', (req, res) => {
+//   res.send(req.oidc.isAuthenticated() ? 'Logged In' : 'Logged Out');
+// });
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
