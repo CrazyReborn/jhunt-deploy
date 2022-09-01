@@ -36,12 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-const setCache = function (req, res, next) {
-  res.set('Cache-control', 'no-store');
-  next();
-};
+// const setCache = function (req, res, next) {
+//   res.set('Cache-control', 'no-store');
+//   next();
+// };
 
-app.use(setCache);
+// app.use(setCache);
 
 app.get('*', (req, res) => {
   res.sendFile('index.html', { root: path.join(__dirname, './public') });
