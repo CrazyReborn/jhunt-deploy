@@ -25,25 +25,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(session({
-//   secret: process.env.EXPRESS_SECRET,
-//   saveUninitialized: true,
-//   // 24 hours
-//   cookie: { maxAge: 1000 * 60 * 60 * 24 },
-//   resave: false,
-// }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.disable('etag');
-
-// const setCache = function (req, res, next) {
-//   res.set('Cache-control', 'no-store');
-//   next();
-// };
-
-// app.use(setCache);
 
 app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged In' : 'Logged Out');
