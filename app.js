@@ -37,19 +37,14 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 const setCache = function (req, res, next) {
-  const period = 60 * 5;
-  if (req.method === 'GET') {
-    res.set('Cache-control', `public, max-age=${period}`);
-  } else {
-    res.set('Cache-control', 'no-store');
-  }
+  res.set('Cache-control', 'no-store');
   next();
 };
 
 app.use(setCache);
 
 app.get('*', (req, res) => {
-  res.sendFile('index.html', {root: path.join(__dirname, './public')});
+  res.sendFile('index.html', { root: path.join(__dirname, './public') });
 });
 
 app.get('/', (req, res) => {
