@@ -25,7 +25,6 @@ exports.applications_get = [
         Application.aggregate([{ $group: { _id: null, avg: { $avg: '$salary' } } }])
           .then((found) => {
             averagesAll = found;
-            return null;
           })
           .catch((userErr) => console.log(userErr));
         Application.find({ user: user._id })
