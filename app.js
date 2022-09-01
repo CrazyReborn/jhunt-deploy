@@ -47,6 +47,10 @@ app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged In' : 'Logged Out');
 });
 
+app.get('/*', (req, res) => {
+  res.sendFile('index.html', { root: path.join(__dirname, './public') });
+});
+
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(process.env.CLIENT_SERVER);
