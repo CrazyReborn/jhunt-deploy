@@ -36,6 +36,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+app.disable('etag');
+
 // const setCache = function (req, res, next) {
 //   res.set('Cache-control', 'no-store');
 //   next();
@@ -45,10 +47,6 @@ app.use('/users', usersRouter);
 
 app.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged In' : 'Logged Out');
-});
-
-app.get('*', (req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, './public') });
 });
 
 app.listen(PORT, () => {
